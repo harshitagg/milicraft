@@ -3,7 +3,9 @@
 one:
   content: MyString
   email: MyString
+  post_id: 1
 
 two:
   content: MyString
   email: MyString
+  post_id: 2
