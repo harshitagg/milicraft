@@ -61,10 +61,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def post_id=(val)
-    write_attribute :post_id, val.to_i
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
@@ -76,5 +72,7 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:content, :email, :post_id)
     end
 
-
+    def post_id=(val)
+      write_attribute :post_id, val.to_i
+    end
 end
