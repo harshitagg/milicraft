@@ -5,6 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-comments = Comment.create([{content: 'Nice Post', email: 'harry@cmu.edu'}, {content: 'Good work', email: 'tom@cmu.edu'}])
-Post.create(title: 'F-16', content: 'Air superiority aircraft', comments: comments)
