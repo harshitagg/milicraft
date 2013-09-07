@@ -11,3 +11,9 @@
  *= require_self
  *= require_tree .
  */
+.limit {
+    text-overflow: ellipsis;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+}
