@@ -1,4 +1,6 @@
 The website is hosted at http://milicraft.herokuapp.com/.
+Code: https://github.com/harshitagg/milicraft
+CI: https://travis-ci.org/harshitagg/milicraft
 
 To run this project on local machine follow these steps:
 1. bundle install
@@ -10,4 +12,4 @@ To run this project on local machine follow these steps:
 Home page lists all the different post available. Clicking on a title of the post will show the complete version of the
 post. The post page also shows user comments for that particular post.
 
-The project has two models i.e. Post and Comment. Each post can have many comments.
+The project has two models i.e. Post and Comment. Each post can have many comments. The website has a very basic implementation of UI.
