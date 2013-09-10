@@ -1,28 +1,44 @@
-<h1>Listing posts</h1>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row full-height">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-10">
+            <h2>Posts</h2>
+          </div>
+          <div class="col-md-2" style="padding-top: 15px;"><%= button_to 'New Post', new_post_path, {:class => "btn btn-primary"} %></div>
+        </div>
+        <hr>
+        <% @posts.each do |post| %>
+            <div class="row inner well">
+              <h2><%= link_to post.title, post %></h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Text</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.title, post %></td>
-        <td><div class="limit"><%= post.text %></div></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+              <p class="limit"><%= post.text %></p>
+              <%= link_to 'Edit', edit_post_path(post), {:class => "btn"} %>
+              <%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </div>
+        <% end %>
+      </div>
+      <div class="col-md-3 about-me">
+        <h4>About me</h4>
+        <hr>
+        <h5>Harshit Agarwal</h5>
+        <img src="http://www.gravatar.com/avatar/148a39ae0aabeb8375aa068aaf44d348" alt="Gravatar of Harshit Agarwal "
+             title="Gravatar of Harshit Agarwal" class="img-rounded">
+        <h5>Tweets</h5>
+        <a class="twitter-timeline" href="https://twitter.com/harshitagg" data-widget-id="318037769916137472">Tweets by
+          @harshitagg</a>
+        <script>!function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = p + "://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, "script", "twitter-wjs");</script>
+      </div>
+    </div>
+  </div>
+</div>
 <br>
-
-<%= link_to 'New Post', new_post_path %>
