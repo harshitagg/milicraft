@@ -19,12 +19,9 @@
         <strong>No comments</strong>
     <% end %>
 
-    <% @post.comments.each do |comment| %>
-        <blockquote>
-          <p><%= comment.body %></p>
-          <small><%= comment.email %></small>
-        </blockquote>
-    <% end %>
+    <div id="comments">
+      <%= render @post.comments.reverse %>
+    </div>
 
     <%= link_to 'Edit Post', edit_post_path(@post) %>
   </div>

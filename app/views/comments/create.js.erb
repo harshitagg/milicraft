@@ -1,0 +1,4 @@
+$('.new_comment').bind('ajax:success', function () {
+    $(this).children(".form-control").val('');
+    $("#comments").html("<%= escape_javascript(render(@post.comments.reverse)) %>")
+});
