@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  wrap_parameters format: [:json, :xml]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -12,6 +13,10 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new(:post => @post)
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @post.to_xml }
+    end
   end
 
   # GET /posts/new
@@ -26,21 +31,28 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      format.html do
+        @post = Post.new(post_params)
+        if @post.save
+          redirect_to @post, notice: 'Post was successfully created.'
+        else
+          render action: 'new'
+        end
+      end
+      format.xml do
+        @post = Post.new(Hash.from_xml(request.body.string)['post'])
+        if @post.save
+          render xml: @post, status: :created
+        else
+          render xml: @post.errors, status: :unprocessable_entity
+        end
       end
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+# PATCH/PUT /posts/1
+# PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -53,24 +65,26 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
+# DELETE /posts/1
+# DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
+      format.xml { head :no_content }
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+# Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+# Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:title, :text)
   end
+
 end
