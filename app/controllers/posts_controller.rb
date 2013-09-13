@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   wrap_parameters format: [:json, :xml]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  skip_before_filter  :verify_authenticity_token
 
   # GET /posts
   # GET /posts.json
@@ -55,12 +56,20 @@ class PostsController < ApplicationController
 # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      format.html do
+        if @post.update(post_params)
+          redirect_to @post, notice: 'Post was successfully updated.'
+        else
+          render action: 'edit'
+        end
+      end
+      format.xml do
+        post = Hash.from_xml(request.body.string)['post']
+        if @post.update(title: post['title'], text: @post['text'])
+          head :no_content
+        else
+          render xml: @post.errors, status: :unprocessable_entity
+        end
       end
     end
   end

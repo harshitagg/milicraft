@@ -53,6 +53,11 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to post_path(assigns(:post))
   end
 
+  test "should update post if request is XML" do
+    put :update, Post.new(text: @post.text, title: @post.title).to_xml, :format => :xml, id: @post
+    assert_equal 204, response.status
+  end
+
   test "should destroy post" do
     assert_difference('Post.count', -1) do
       delete :destroy, id: @post
