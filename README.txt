@@ -12,6 +12,9 @@ To run this project on local machine follow these steps:
 Home page lists all the different post available. Clicking on a title of the post will show the complete version of the
 post. The post page also shows user comments for that particular post.
 
+A post can be created by clicking new post button and edited using edit
+post button.
+
 The project has two models i.e. Post and Comment. Each post can have many comments.
 
 Added REST Crud API for 'Post' model, use following curl commands to test them:
