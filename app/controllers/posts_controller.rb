@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   wrap_parameters format: [:json, :xml]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  skip_before_filter  :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token
 
   # GET /posts
   # GET /posts.json
@@ -95,5 +95,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :text)
   end
-
 end
